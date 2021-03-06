@@ -4,6 +4,9 @@ package de.htwberlin.reversi;
 import de.htwberlin.reversi.strategies.MaxTokenStrategy;
 import de.htwberlin.reversi.strategies.UserInputStrategy;
 
+import java.util.Locale;
+import java.util.Scanner;
+
 public class ReversiApplication {
 
     private ReversiGame game;
@@ -19,11 +22,49 @@ public class ReversiApplication {
         System.out.println("***** *** PIRATE REVERSI *** *****");
         System.out.println("***** ***** ********** ***** *****");
         System.out.println();
+
+        Scanner scanner = new Scanner(System.in);
+        String input = "";
+        while (input.equals("")) {
+            if (hasRunningGame()) {
+                System.out.println("Spiel <F>ortsetzen");
+            }
+            System.out.println("Neues Spiel gegen <S>pieler");
+            System.out.println("Neues Spiel gegen <C>omputer");
+            System.out.println("<A>I-Match Computer gegen Computer");
+            System.out.println("<B>eenden");
+            System.out.print("Geben Sie einen Wert ein: ");
+            input = scanner.nextLine();
+            switch (input.toLowerCase(Locale.ROOT)) {
+                case "f":
+                    if (hasRunningGame()) {
+                        continueGame();
+                    } else {
+                        input = "";
+                        System.out.println("Ungültiger Wert. Wiederholen Sie die Eingabe.\n");
+                    }
+                    break;
+                case "s":
+                    startNewGameVersusPlayer();
+                    break;
+                case "c":
+                    startNewGameVersusComputer();
+                    break;
+                case "a":
+                    startNewGameAI();
+                    break;
+                case "b":
+                    break;
+                default:
+                    input = "";
+                    System.out.println("Ungültiger Wert. Wiederholen Sie die Eingabe.\n");
+                    break;
+            }
+        }
     }
 
     private void mainMenu() {
         printMainMenu();
-        startNewGameVersusComputer();
     }
 
 
