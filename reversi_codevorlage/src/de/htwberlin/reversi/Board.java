@@ -95,8 +95,36 @@ public class Board {
      * @return TRUE if the target is unoccupied, within the bounds of the field and enabled flipping of opponent tokens
      */
     public boolean isValidMove(int[] target, char tokenColor) {
-        // TODO
-        return true;
+        int x = target[0];
+        int y = target[1];
+
+        if (fields[x][y] == EMPTY) {
+            if (x > 1 && fields[x-1][y] != tokenColor) {
+                for (int i = x - 2; i >= 0; i--) {
+                    if (fields[i][y] == tokenColor)
+                        return true;
+                }
+            }
+            if (x < 6 && fields[x+1][y] != tokenColor) {
+                for (int i = x + 2; i < 8; i++) {
+                    if (fields[i][y] == tokenColor)
+                        return true;
+                }
+            }
+            if (y > 1 && fields[x][y-1] != tokenColor) {
+                for (int i = y - 2; i >= 0; i--) {
+                    if (fields[x][i] == tokenColor)
+                        return true;
+                }
+            }
+            if (y < 6 && fields[x][y+1] != tokenColor) {
+                for (int i = y + 2; i < 8; i++) {
+                    if (fields[x][i] == tokenColor)
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
