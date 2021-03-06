@@ -99,28 +99,83 @@ public class Board {
         int y = target[1];
 
         if (fields[x][y] == EMPTY) {
+            //left
             if (x > 1 && fields[x-1][y] != tokenColor) {
                 for (int i = x - 2; i >= 0; i--) {
                     if (fields[i][y] == tokenColor)
                         return true;
                 }
             }
+
+            //right
             if (x < 6 && fields[x+1][y] != tokenColor) {
                 for (int i = x + 2; i < 8; i++) {
                     if (fields[i][y] == tokenColor)
                         return true;
                 }
             }
+
+            //up
             if (y > 1 && fields[x][y-1] != tokenColor) {
                 for (int i = y - 2; i >= 0; i--) {
                     if (fields[x][i] == tokenColor)
                         return true;
                 }
             }
+
+            //down
             if (y < 6 && fields[x][y+1] != tokenColor) {
                 for (int i = y + 2; i < 8; i++) {
                     if (fields[x][i] == tokenColor)
                         return true;
+                }
+            }
+
+            //left up
+            if (x > 1 && y > 1 && fields[x-1][y-1] != tokenColor) {
+                int i = x - 2;
+                int j = y - 2;
+                while (i >= 0 && j >= 0) {
+                    if (fields[i][j] == tokenColor)
+                        return true;
+                    i--;
+                    j--;
+                }
+            }
+
+            //left down
+            if (x > 1 && y < 6 && fields[x-1][y+1] != tokenColor) {
+                int i = x - 2;
+                int j = y + 2;
+                while (i >= 0 && j < 8) {
+                    if (fields[i][j] == tokenColor)
+                        return true;
+                    i--;
+                    j++;
+                }
+            }
+
+            //right up
+            if (x < 6 && y > 1 && fields[x+1][y-1] != tokenColor) {
+                int i = x + 2;
+                int j = y - 2;
+                while (i < 8 && j >= 0) {
+                    if (fields[i][j] == tokenColor)
+                        return true;
+                    i++;
+                    j--;
+                }
+            }
+
+            //right down
+            if (x < 6 && y < 6 && fields[x+1][y+1] != tokenColor) {
+                int i = x + 2;
+                int j = y + 2;
+                while (i < 8 && j < 8) {
+                    if (fields[i][j] == tokenColor)
+                        return true;
+                    i++;
+                    j++;
                 }
             }
         }
