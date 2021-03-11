@@ -74,9 +74,171 @@ public class Board {
 
         // TODO
         // place token
+        fields[x][y] = tokenColor;
+        boolean isFlipAvailable = false;
         // flip tokens horizontal if applicable
+        // flip left
+        if (x > 1 && fields[x-1][y] != tokenColor) {
+            isFlipAvailable = false;
+            for (int i = x - 2; i >= 0; i--) {
+                if (fields[i][y] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+            }
+            if (isFlipAvailable) {
+                int tempX = x - 1;
+                while (fields[tempX][y] != tokenColor) {
+                    fields[tempX][y] = tokenColor;
+                    tempX--;
+                }
+            }
+        }
+        //right
+        if (x < 6 && fields[x+1][y] != tokenColor) {
+            isFlipAvailable = false;
+            for (int i = x + 2; i < 8; i++) {
+                if (fields[i][y] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+            }
+            if (isFlipAvailable) {
+                int tempX = x + 1;
+                while (fields[tempX][y] != tokenColor) {
+                    fields[tempX][y] = tokenColor;
+                    tempX++;
+                }
+            }
+        }
         // flip tokens vertical if applicable
+        //up
+        if (y > 1 && fields[x][y-1] != tokenColor) {
+            isFlipAvailable = false;
+            for (int i = y - 2; i >= 0; i--) {
+                if (fields[x][i] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+            }
+            if (isFlipAvailable) {
+                int tempY = y - 1;
+                while (fields[x][tempY] != tokenColor) {
+                    fields[x][tempY] = tokenColor;
+                    tempY--;
+                }
+            }
+        }
+        //down
+        if (y < 6 && fields[x][y+1] != tokenColor) {
+            isFlipAvailable = false;
+            for (int i = y + 2; i < 8; i++) {
+                if (fields[x][i] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+            }
+            if (isFlipAvailable) {
+                int tempY = y + 1;
+                while (fields[x][tempY] != tokenColor) {
+                    fields[x][tempY] = tokenColor;
+                    tempY++;
+                }
+            }
+        }
         // flip tokens diagonal if applicable
+        //left up
+        if (x > 1 && y > 1 && fields[x-1][y-1] != tokenColor) {
+            int tempX = x - 2;
+            int tempY = y - 2;
+            isFlipAvailable = false;
+            while (tempX >= 0 && tempY >= 0) {
+                if (fields[tempX][tempY] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+                tempX--;
+                tempY--;
+            }
+            if (isFlipAvailable) {
+                tempX = x - 1;
+                tempY = y - 1;
+                while (fields[tempX][tempY] != tokenColor) {
+                    fields[tempX][tempY] = tokenColor;
+                    tempX--;
+                    tempY--;
+                }
+            }
+        }
+        //left down
+        if (x > 1 && y < 6 && fields[x-1][y+1] != tokenColor) {
+            int tempX = x - 2;
+            int tempY = y + 2;
+            isFlipAvailable = false;
+            while (tempX >= 0 && tempY < 8) {
+                if (fields[tempX][tempY] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+                tempX--;
+                tempY++;
+            }
+            if (isFlipAvailable) {
+                tempX = x - 1;
+                tempY = y + 1;
+                while (fields[tempX][tempY] != tokenColor) {
+                    fields[tempX][tempY] = tokenColor;
+                    tempX--;
+                    tempY++;
+                }
+            }
+        }
+        //right up
+        if (x < 6 && y > 1 && fields[x+1][y-1] != tokenColor) {
+            int tempX = x + 2;
+            int tempY = y - 2;
+            isFlipAvailable = false;
+            while (tempX < 8 && tempY >= 0) {
+                if (fields[tempX][tempY] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+                tempX++;
+                tempY--;
+            }
+            if (isFlipAvailable) {
+                tempX = x + 1;
+                tempY = y - 1;
+                while (fields[tempX][tempY] != tokenColor) {
+                    fields[tempX][tempY] = tokenColor;
+                    tempX++;
+                    tempY--;
+                }
+            }
+        }
+        //right down
+        if (x < 6 && y < 6 && fields[x+1][y+1] != tokenColor) {
+            int tempX = x + 2;
+            int tempY = y + 2;
+            isFlipAvailable = false;
+            while (tempX < 8 && tempY < 8) {
+                if (fields[tempX][tempY] == tokenColor) {
+                    isFlipAvailable = true;
+                    break;
+                }
+                tempX++;
+                tempY++;
+            }
+            if (isFlipAvailable) {
+                tempX = x + 1;
+                tempY = y + 1;
+                while (fields[tempX][tempY] != tokenColor) {
+                    fields[tempX][tempY] = tokenColor;
+                    tempX++;
+                    tempY++;
+                }
+            }
+        }
     }
 
     /**
