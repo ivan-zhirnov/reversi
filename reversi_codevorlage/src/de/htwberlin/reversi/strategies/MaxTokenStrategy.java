@@ -13,9 +13,18 @@ public class MaxTokenStrategy implements ReversiStrategy {
     public int[] getTarget(Board board, char tokenColor) {
        
     	int[] result = {0,0};
+    	int maxCount = 0;
 
-        // TODO (kann beliebig geändert werden)
-       
+        int[][] validMoves = board.getValidMoves(tokenColor);
+        for (int[] move: validMoves) {
+            if (move == null)
+                continue;
+            int tmpCount = board.countFlipTokens(tokenColor, move);
+            if (tmpCount > maxCount) {
+                maxCount = tmpCount;
+                result = move;
+            }
+        }
 
         System.out.println(tokenColor + " ist am Zug.");
        
