@@ -72,7 +72,8 @@ public class Board {
             throw new RuntimeException("Invalid move: " + Arrays.toString(target));
         }
 
-        // TODO
+        int tokensFlipedCount = 0;
+
         // place token
         fields[x][y] = tokenColor;
         boolean isFlipAvailable = false;
@@ -90,6 +91,7 @@ public class Board {
                 int tempX = x - 1;
                 while (fields[tempX][y] != tokenColor) {
                     fields[tempX][y] = tokenColor;
+                    tokensFlipedCount++;
                     tempX--;
                 }
             }
@@ -107,6 +109,7 @@ public class Board {
                 int tempX = x + 1;
                 while (fields[tempX][y] != tokenColor) {
                     fields[tempX][y] = tokenColor;
+                    tokensFlipedCount++;
                     tempX++;
                 }
             }
@@ -125,6 +128,7 @@ public class Board {
                 int tempY = y - 1;
                 while (fields[x][tempY] != tokenColor) {
                     fields[x][tempY] = tokenColor;
+                    tokensFlipedCount++;
                     tempY--;
                 }
             }
@@ -142,6 +146,7 @@ public class Board {
                 int tempY = y + 1;
                 while (fields[x][tempY] != tokenColor) {
                     fields[x][tempY] = tokenColor;
+                    tokensFlipedCount++;
                     tempY++;
                 }
             }
@@ -165,6 +170,7 @@ public class Board {
                 tempY = y - 1;
                 while (fields[tempX][tempY] != tokenColor) {
                     fields[tempX][tempY] = tokenColor;
+                    tokensFlipedCount++;
                     tempX--;
                     tempY--;
                 }
@@ -188,6 +194,7 @@ public class Board {
                 tempY = y + 1;
                 while (fields[tempX][tempY] != tokenColor) {
                     fields[tempX][tempY] = tokenColor;
+                    tokensFlipedCount++;
                     tempX--;
                     tempY++;
                 }
@@ -211,6 +218,7 @@ public class Board {
                 tempY = y - 1;
                 while (fields[tempX][tempY] != tokenColor) {
                     fields[tempX][tempY] = tokenColor;
+                    tokensFlipedCount++;
                     tempX++;
                     tempY--;
                 }
@@ -234,11 +242,26 @@ public class Board {
                 tempY = y + 1;
                 while (fields[tempX][tempY] != tokenColor) {
                     fields[tempX][tempY] = tokenColor;
+                    tokensFlipedCount++;
                     tempX++;
                     tempY++;
                 }
             }
         }
+
+        System.out.println(tokensFlipedCount + " Steine umgedreht");
+        int yellowTokensCount = 0;
+        int redTokensCount = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (fields[i][j] == YELLOW) {
+                    yellowTokensCount++;
+                } else if (fields[i][j] == RED) {
+                    redTokensCount++;
+                }
+            }
+        }
+        System.out.println("X - " + yellowTokensCount + "    O - " + redTokensCount);
     }
 
     /**
