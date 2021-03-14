@@ -25,7 +25,7 @@ public class ReversiApplication {
 
         Scanner scanner = new Scanner(System.in);
         String input = "";
-        while (input.equals("")) {
+        while (!input.equals("b")) {
             if (hasRunningGame()) {
                 System.out.println("Spiel <F>ortsetzen");
             }
@@ -34,8 +34,8 @@ public class ReversiApplication {
             System.out.println("<A>I-Match Computer gegen Computer");
             System.out.println("<B>eenden");
             System.out.print("Geben Sie einen Wert ein: ");
-            input = scanner.nextLine();
-            switch (input.toLowerCase(Locale.ROOT)) {
+            input = scanner.nextLine().toLowerCase(Locale.ROOT);
+            switch (input) {
                 case "f":
                     if (hasRunningGame()) {
                         continueGame();
@@ -56,7 +56,6 @@ public class ReversiApplication {
                 case "b":
                     break;
                 default:
-                    input = "";
                     System.out.println("Ungültiger Wert. Wiederholen Sie die Eingabe.\n");
                     break;
             }

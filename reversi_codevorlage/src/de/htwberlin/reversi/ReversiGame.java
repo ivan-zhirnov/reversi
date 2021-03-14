@@ -44,6 +44,16 @@ public class ReversiGame {
                 board.placeToken(targetYellow, Board.YELLOW);
             }
         }
+
+        int[] score = board.getCurrentScore();
+        if (score[0] > score[1]) {
+            System.out.println("X hat gewonnen.");
+        } else if (score[0] < score[1]) {
+            System.out.println("O hat gewonnen.");
+        } else {
+            System.out.println("Niemand hat gewonnen.");
+        }
+        System.out.println("X - " + score[0] + "    O - " + score[1]);
     }
 
 

@@ -1,5 +1,7 @@
 package de.htwberlin.reversi;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -250,18 +252,8 @@ public class Board {
         }
 
         System.out.println(tokensFlipedCount + " Steine umgedreht");
-        int yellowTokensCount = 0;
-        int redTokensCount = 0;
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                if (fields[i][j] == YELLOW) {
-                    yellowTokensCount++;
-                } else if (fields[i][j] == RED) {
-                    redTokensCount++;
-                }
-            }
-        }
-        System.out.println("X - " + yellowTokensCount + "    O - " + redTokensCount);
+        int[] score = getCurrentScore();
+        System.out.println("X - " + score[0] + "    O - " + score[1]);
     }
 
     /**
@@ -407,8 +399,13 @@ public class Board {
     }
 
     public boolean hasValidMoves(char tokenColor) {
-        // TODO
-        return true;
+        int[][] validMoves = getValidMoves(tokenColor);
+        for (int [] move: validMoves) {
+            if (move != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -582,5 +579,19 @@ public class Board {
         }
 
         return result;
+    }
+
+    int[] getCurrentScore() {
+        int yellowCount = 0;
+        int redCount = 0;
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (fields[i][j] == YELLOW)
+                    yellowCount++;
+                else if (fields[i][j] == RED)
+                    redCount++;
+            }
+        }
+        return new int[] {yellowCount, redCount};
     }
 }
