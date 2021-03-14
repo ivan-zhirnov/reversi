@@ -31,19 +31,23 @@ public class ReversiGame {
 
         running = true;
 
-        // TODO
-        board.print();
-        int[] targetRed = playerRedStrategy.getTarget(board, Board.RED);
-        board.placeToken(targetRed, Board.RED);
+        while (!isFinished()) {
+            if (board.hasValidMoves(Board.RED)) {
+                board.print();
+                int[] targetRed = playerRedStrategy.getTarget(board, Board.RED);
+                board.placeToken(targetRed, Board.RED);
+            }
 
-        board.print();
-        int[] targetYellow = playerYellowStrategy.getTarget(board, Board.YELLOW);
-        board.placeToken(targetYellow, Board.YELLOW);
-
+            if (board.hasValidMoves(Board.YELLOW)) {
+                board.print();
+                int[] targetYellow = playerYellowStrategy.getTarget(board, Board.YELLOW);
+                board.placeToken(targetYellow, Board.YELLOW);
+            }
+        }
     }
 
 
     public boolean isFinished() {
-        return board.hasValidMoves(Board.RED) && board.hasValidMoves(Board.YELLOW);
+        return !board.hasValidMoves(Board.RED) && !board.hasValidMoves(Board.YELLOW);
     }
 }
