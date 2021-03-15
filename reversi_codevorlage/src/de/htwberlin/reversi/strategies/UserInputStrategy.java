@@ -9,6 +9,13 @@ import java.util.regex.Pattern;
  * Strategy to determine move by prompting the user for input.
  */
 public class UserInputStrategy implements ReversiStrategy {
+    private final String playerName;
+
+    public UserInputStrategy(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Geben Sie den Namen des Spielers ein: ");
+        playerName = scanner.nextLine();
+    }
 
     /**
      * Ask the user to enter a target field. Validate input and re-prompt until valid.
@@ -33,5 +40,7 @@ public class UserInputStrategy implements ReversiStrategy {
         return result;
     }
 
-
+    public String getPlayerName() {
+        return playerName;
+    }
 }

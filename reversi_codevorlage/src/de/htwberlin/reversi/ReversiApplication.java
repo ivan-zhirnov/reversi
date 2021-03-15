@@ -1,6 +1,7 @@
 package de.htwberlin.reversi;
 
 
+import de.htwberlin.reversi.highscore.ScoreList;
 import de.htwberlin.reversi.strategies.MaxTokenStrategy;
 import de.htwberlin.reversi.strategies.UserInputStrategy;
 
@@ -10,6 +11,7 @@ import java.util.Scanner;
 public class ReversiApplication {
 
     private ReversiGame game;
+    private final ScoreList scoreList = new ScoreList();
 
     public static void main(String[] args) {
         ReversiApplication battleshipApplication = new ReversiApplication();
@@ -32,6 +34,7 @@ public class ReversiApplication {
             System.out.println("Neues Spiel gegen <S>pieler");
             System.out.println("Neues Spiel gegen <C>omputer");
             System.out.println("<A>I-Match Computer gegen Computer");
+            System.out.println("<L>iste drucken");
             System.out.println("<B>eenden");
             System.out.print("Geben Sie einen Wert ein: ");
             input = scanner.nextLine().toLowerCase(Locale.ROOT);
@@ -52,6 +55,9 @@ public class ReversiApplication {
                     break;
                 case "a":
                     startNewGameAI();
+                    break;
+                case "l":
+                    scoreList.printList();
                     break;
                 case "b":
                     break;
@@ -76,17 +82,17 @@ public class ReversiApplication {
     }
 
     private void startNewGameVersusComputer() {
-        this.game = new ReversiGame(new UserInputStrategy(), new MaxTokenStrategy());
+        this.game = new ReversiGame(new UserInputStrategy(), new MaxTokenStrategy(), scoreList);
         continueGame();
     }
 
     private void startNewGameVersusPlayer() {
-        this.game = new ReversiGame(new UserInputStrategy(), new UserInputStrategy());
+        this.game = new ReversiGame(new UserInputStrategy(), new UserInputStrategy(), scoreList);
         continueGame();
     }
 
     private void startNewGameAI() {
-        this.game = new ReversiGame(new MaxTokenStrategy(), new MaxTokenStrategy());
+        this.game = new ReversiGame(new MaxTokenStrategy(), new MaxTokenStrategy(), scoreList);
         continueGame();
     }
 

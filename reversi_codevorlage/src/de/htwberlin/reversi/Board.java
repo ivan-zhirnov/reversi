@@ -398,6 +398,10 @@ public class Board {
         return x + y;
     }
 
+
+    /**
+     * Checks that player has valid moves
+     */
     public boolean hasValidMoves(char tokenColor) {
         int[][] validMoves = getValidMoves(tokenColor);
         for (int [] move: validMoves) {
@@ -581,6 +585,9 @@ public class Board {
         return result;
     }
 
+    /**
+     * Returns score of red and yellow
+     */
     int[] getCurrentScore() {
         int yellowCount = 0;
         int redCount = 0;
